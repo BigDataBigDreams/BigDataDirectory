@@ -6,25 +6,31 @@ cur = db.cursor()
 
 fout = open('C:\\wamp\\www\\dump.txt', 'w')
 def ex(sql):
-	fout.write(sql+"\n")
-	cur.execute(sql)
-
+	try:
+		print sql
+		fout.write(sql+"\n")
+		cur.execute(sql)
+		while cur.nextset() is not None: pass
+	except Exception as e:
+		print e
+		
 class DataSet:
 	def __init__(self, name, pref, keys):
 		self.name = name
 		self.keys = keys
 		self.pref = pref
 		
+	def dropString(self):
+		return "drop table if exists %s;"%self.name
+	
 	def createString(self):
-		s = "drop table if exists %s;"%self.name
-		s += """create table %(name)s (
-		%(pref)s_id mediumint not null auto_increment,
-		%(pref)s_brand varchar(64),
-		%(pref)s_model varchar(128),
-		%(pref)s_power decimal(6,3),
-		%(pref)s_star decimal(2,1),
-		PRIMARY KEY (%(pref)s_id));"""
-		return s.replace('\\w+', ' ') %({'name':self.name,'pref':self.pref})
+		return """create table %(name)s (
+		id mediumint not null auto_increment,
+		brand varchar(64),
+		model varchar(128),
+		power decimal(6,3),
+		star decimal(2,1),
+		PRIMARY KEY (id));"""%({'name':self.name})
 		
 	def colArray(self):
 		cols = {}
@@ -51,24 +57,30 @@ class DataSet:
 	def insertString(self):
 		cols = self.colArray()
 		length = len(cols['model'])
-		sql = ""
 		for j in xrange(0, length):
 			order = []
 			for key in self.keys:
 				if cols[key][j] != "":
 					order.append(key)
-			sql += "insert into %s (%s_"%(self.name,self.pref)
-			sql += (",%s_"%self.pref).join(order)
-			sql += ") values ("
+			sql = "insert into %s (%s) values ("%(self.name,",".join(order))
 			sql += ",".join([self.formatVal(k, cols[k][j]) for k in order])
 			sql += ");"
-		return sql
-			
+			ex(sql)
 
-keys = {'brand':'Brand','model':'Model_No','star':'Star2010_Heat','power':'H-Power_Inp_Rated'}
-dset = DataSet('airconditioner', 'ac', keys)	
+sets = []
+sets.append(DataSet("clothesdryer","cd",{"brand":"Brand","model":"Model No","star":"New Star","power":"New CEC"}))
+sets.append(DataSet("dishwashers","dw",{"brand":"Brand","model":"Model No","star":"New Star","power":"CEC_"}))
+sets.append(DataSet("clotheswashers","cw",{"brand":"Brand","model":"Model No","star":"New Star","power":"CEC_"}))
+sets.append(DataSet("fridgefreezer","ff",{"brand":"Brand","model":"Model No","star":"Star2009","power":"CEC_"}))
+sets.append(DataSet("televisions","tv",{"brand":"Brand_Reg","model":"Model_No","star":"Star","power":"CEC"}))
+sets.append(DataSet("computermonitors","cm",{"brand":"Brand Name","model":"Model Number","star":"Star Rating","power":"Comparative Energy Consumption"}))
+sets.append(DataSet('airconditioner', 'ac', {'brand':'Brand','model':'Model_No','star':'Star2010_Heat','power':'H-Power_Inp_Rated'}))	
 
-ex(dset.createString() + dset.insertString())
+for sett in sets:
+	ex(sett.dropString())
+	ex(sett.createString())
+	sett.insertString()
+
 #fout.close()
 #with open('c:\\wamp\\www\\data\\dump.txt', 'w') as fout:
 #	fout.write(dset.createString())
