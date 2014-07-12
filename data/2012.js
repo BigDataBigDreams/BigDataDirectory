@@ -1,4 +1,4 @@
-[["Fine Industry1", "Broad Industry1,4,5", 0, 0, 0, 0, 0, 0],
+['Fine Industry','Broad Industry','Number', 
 ["Nursery and Floriculture Production", "A. Agriculture, Forestry and Fishing", 1565, 3071186, 685, 35790582, 1065799, 26791931],
 ["Mushroom and Vegetable Growing", "A. Agriculture, Forestry and Fishing", 1850, 4991481, 505, 19079628, 986842, 35428435],
 ["Fruit and Tree Nut Growing", "A. Agriculture, Forestry and Fishing", 6040, 7417502, 3670, 402318798, 2181028, 131513878],
