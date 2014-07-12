@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Job Predictions</title>
+		<link href="css/layout.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body>
+		<div class="navbox-wrap">
+			<ul class="navbox">
+				<li>My Energy Consumption</li>
+				<li>Analysis of my results</li>
+				<li>How to reduce my consumption</li>
+			</ul>
+		</div>
+		<div class="content-wrap">
+			<div class="content">
+				<h1 class="header">MY ENERGY CONSUMPTION</h1>
+				<div class="myAppliances">
+					<table class="applianceTable">
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th>Carbon Emmisions<br />(tonnes per year)</th>
+						</tr>
+						<tr>
+							<td><input type="text" value="Select appliance"></input></td>
+							<td><input type="text" value="Select model"></input></td>
+							<td><a href="javascript:void(0);">Use energy stars</a></td>
+							<td></td>
+						</tr>
+					</table>
+					<a href="javascript:void(0);">+ Add another appliance</a>
+				</div>
+				<div class="results">
+					<div class="temperature">
+						<div>If everyone had the same appliances as me, the effect on the global temperature is</div>
+						<div id="tempValue">0.00*</div>
+					</div>
+					<div id="showbox">
+						##CONTENT##
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
