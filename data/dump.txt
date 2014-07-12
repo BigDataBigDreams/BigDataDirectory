@@ -1,0 +1,7 @@
+"create table airconditioner (
+		ac_id mediumint not null auto_increment,
+		ac_brand varchar(32),
+		ac_model varchar(32),
+		ac_power decimal(4,2),
+		ac_star decimal(2,1),
+		PRIMARY KEY (ac_id));
