@@ -4,9 +4,9 @@ import MySQLdb
 db = MySQLdb.connect('localhost','govhack', 'gov', 'govhack')
 cur = db.cursor()
 
-#fout = open('c:\\wamp\\www\\data\\dump.txt', 'w')
+fout = open('C:\\wamp\\www\\dump.txt', 'w')
 def ex(sql):
-	#fout.write(sql+"\n")
+	fout.write(sql+"\n")
 	cur.execute(sql)
 
 class DataSet:
@@ -16,11 +16,8 @@ class DataSet:
 		self.pref = pref
 		
 	def createString(self):
-		try:
-			ex("drop table %s;"%self.name)
-		except Exception as e:
-			print "Couldn't drop %s"%self.name
-		s = """create table %(name)s (
+		s = "drop table if exists %s;"%self.name
+		s += """create table %(name)s (
 		%(pref)s_id mediumint not null auto_increment,
 		%(pref)s_brand varchar(64),
 		%(pref)s_model varchar(128),
@@ -51,28 +48,27 @@ class DataSet:
 			return "'%s'"%val
 		return val
 	
-	def insert(self):
-		s = ""
+	def insertString(self):
 		cols = self.colArray()
 		length = len(cols['model'])
+		sql = ""
 		for j in xrange(0, length):
 			order = []
 			for key in self.keys:
 				if cols[key][j] != "":
 					order.append(key)
-			sql = "insert into %s (%s_"%(self.name,self.pref)
+			sql += "insert into %s (%s_"%(self.name,self.pref)
 			sql += (",%s_"%self.pref).join(order)
 			sql += ") values ("
 			sql += ",".join([self.formatVal(k, cols[k][j]) for k in order])
 			sql += ");"
-			ex(sql)
+		return sql
 			
 
 keys = {'brand':'Brand','model':'Model_No','star':'Star2010_Heat','power':'H-Power_Inp_Rated'}
 dset = DataSet('airconditioner', 'ac', keys)	
 
-dset.createTable()
-dset.insert()
+ex(dset.createString() + dset.insertString())
 #fout.close()
 #with open('c:\\wamp\\www\\data\\dump.txt', 'w') as fout:
 #	fout.write(dset.createString())
