@@ -1,0 +1,41 @@
+name clothesdryer
+pref cd
+brand Brand
+model Model No
+star New Star
+power New CEC
+
+name dishwashers
+pref dw
+brand Brand
+model Model No
+star New Star
+power CEC_
+
+name clotheswashers
+pref cw
+brand Brand
+model Model No
+star New Star
+power CEC_
+
+name fridgefreezer
+pref ff
+brand Brand
+model Model No
+star Star2009
+power CEC_
+
+name televisions
+pref tv
+brand Brand_Reg
+model Model_No
+star Star
+power CEC
+
+name computermonitors
+pref cm
+brand Brand Name
+model Model Number
+star Star Rating
+power Comparative Energy Consumption
