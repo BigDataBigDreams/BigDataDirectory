@@ -17,7 +17,6 @@ if( isset($_POST['tableName']) && !empty($_POST['tableName']) && isset($_POST['s
 	{
 		$tableName = $_POST['tableName']; 
 		$star = $_POST['star'];
-		$max = $star + 0.5; $min = $star - 0.5; 
 		$sql = "SELECT * FROM airconditioner
 				ORDER BY ABS(star-$star) ASC limit 10";
 		$result = mysqli_query($connectDB, $sql);

@@ -11,9 +11,6 @@ if (mysqli_connect_errno())
 
 $data = array();
 
-$_POST['tableName'] = "airconditioner";
-$_POST['brand'] = "A";
-
 if( isset($_POST['tableName']) && !empty($_POST['tableName']) && isset($_POST['brand']) )
 {
 	$tableName = $_POST['tableName']; $brand = strtoupper($_POST['brand']);
@@ -26,6 +23,8 @@ if( isset($_POST['tableName']) && !empty($_POST['tableName']) && isset($_POST['b
 	    	$data[] = $row[0];
 		}
 	}
+} else {
+	$data = 'invalid state';	
 }
 
 echo json_encode($data);

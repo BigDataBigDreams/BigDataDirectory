@@ -2,6 +2,20 @@ SELECT_MODEL = "Search for model"
 OR_USE_STARS = "or use stars"
 OR_USE_MODEL = "or search model"
 
+phps = 'resources/main/load'
+findAjax = (type, obj, call)->
+	$.post(phps+type+'.php', obj, call)
+	
+window.getTable = (row)->return $(row).find('select').val()
+findBrand = (row)->
+	findAjax('Brands', {'tableName':getTable(row),'brand':like},(brands)->showBrands(row, brands))
+
+window.nearestStar = (stars, row)->
+	findAjax('ByStar', {'tableName':getTable(row),'star':stars},(res)->console.log(res))#row.find('td').last().html(res.power))
+	
+showBrands = (row, brands)->
+	#don some
+
 window.modelInput = ()->
 	return $('<input>').addClass('model')
 		.attr({type: 'text',value:SELECT_MODEL})
@@ -9,6 +23,8 @@ window.modelInput = ()->
 			this.value = "" if this.value == SELECT_MODEL
 		).focusout(()->
 			this.value = SELECT_MODEL if !this.value
+		).keyup(()->
+			findBrands($(this).parents('tr'))
 		)
 
 window.getStarInput = ()->
@@ -20,7 +36,8 @@ window.getStarInput = ()->
 			stars.push($('<span>')
 				.click(()->
 					star.removeClass('active') for star in stars
-					stars[k].addClass('active') for k in [0..lj]))
+					stars[k].addClass('active') for k in [0..lj]
+					nearestStar(lj, $($(this).parents('tr')))))
 				
 	return starspan.append(stars)
 	
@@ -49,7 +66,7 @@ window.getNewRow = ()->
 				else
 					jthis.html(OR_USE_MODEL)
 					newRow.find('.input').html(getStarInput()))))
-		.append($('<td>'))
+		.append($('<td>').html(0))
 	return newRow
 	
 addNewAppliance = ()->		
@@ -69,3 +86,13 @@ window.resultsReady = do ()->
 		else
 			$('.navbox li').removeClass('navigable')
 		return res
+	
+window.getModel = ()->
+	model = []
+	for row in $('.appliances-table')
+		cols = rows.find('td')
+		model.append({
+			type: $(cols[0]).val()
+			co2: parseInt($(cols[3]).html())
+		})
+	return model
