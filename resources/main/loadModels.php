@@ -18,7 +18,7 @@ if( isset($_POST['tableName']) && !empty($_POST['tableName'])
 	{
 		$tableName = $_POST['tableName']; 
 		$brand = strtoupper($_POST['brand']);
-		$model = $_POST['model'];
+		$model = strtoupper($_POST['model']);
 		$sql = "SELECT * FROM $tableName 
 				WHERE UPPER(brand) LIKE '$brand'
 				AND UPPER(model) LIKE '$model%'

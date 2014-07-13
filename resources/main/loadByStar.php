@@ -11,25 +11,28 @@ if (mysqli_connect_errno())
 
 $data = array();
 
-$_POST['tableName'] = "";
+$_POST['tableName'] = "airconditioner";
+$_POST['brand'] = "AKAI";
+$_POST['star'] = 2;
 
 if( isset($_POST['tableName']) && !empty($_POST['tableName']) 
-	&& isset($_POST['brand']) && isset($_POST['model']) )
+	&& isset($_POST['brand']) && isset($_POST['star']) )
 {
 	try
 	{
 		$tableName = $_POST['tableName']; 
 		$brand = strtoupper($_POST['brand']);
-		$model = $_POST['model'];
-		$sql = "SELECT * FROM $tableName 
-				WHERE UPPER(brand) LIKE '$brand'
-				AND UPPER(model) LIKE '$model%'
-				limit 10;";
+		$star = $_POST['star'];
+		$max = $star + 0.5; $min = $star - 0.5; 
+		$sql = "SELECT * FROM airconditioner 
+				WHERE UPPER(brand) LIKE 'AKAI' 
+				AND star BETWEEN $min AND $max 
+				ORDER BY brand ASC limit 10";
 		$result = mysqli_query($connectDB, $sql);
 		if($result)
 		{
 			while($row = mysqli_fetch_array($result))
-			{
+			{	
 		    	$data[] = array(
 			        "id" => $row['id'],
 			        "brand" => $row['brand'],
