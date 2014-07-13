@@ -4,9 +4,10 @@ OR_USE_MODEL = "or search model"
 
 phps = 'resources/main/load'
 findAjax = (type, obj, call)->
-	$.getJSON(phps+type+'.php', obj, (res)->
+	$.post(phps+type+'.php', obj, (res)->
 		console.log(res)
-		call(res))
+		jsonRes = eval(res)
+		call(jsonRes))
 	
 window.getTable = (row)->return $(row).find('select').val()
 findBrand = (row)->
@@ -51,7 +52,7 @@ window.getNewRow = ()->
 				<option value="">Select appliance</option>
 				<option value="airconditioner">Air conditioner</option>
 				<option value="clothesdryer">Clothes dryer</option>
-				<option value="computormonitors">Computor monitor</option>
+				<option value="computermonitors">Computor monitor</option>
 				<option value="dishwashers">Dishwasher</option>
 				<option value="fridgefreezer">Fridge/Freezer</option>
 				<option value="television">Television</option>

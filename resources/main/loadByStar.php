@@ -16,8 +16,8 @@ if( isset($_POST['tableName']) && !empty($_POST['tableName']) && isset($_POST['s
 	try
 	{
 		$tableName = $_POST['tableName']; 
-		$star = $_POST['star'];
-		$sql = "SELECT * FROM $tableName ORDER BY ABS(star-$star) limit 10;";
+		$star = intval($_POST['star']);
+		$sql = "SELECT * FROM $tableName ORDER BY ABS(star-$star) limit 10";
 		$result = mysqli_query($connectDB, $sql);
 		if($result)
 		{
@@ -33,15 +33,14 @@ if( isset($_POST['tableName']) && !empty($_POST['tableName']) && isset($_POST['s
 			}
 		}
 	}
-	catch (Expcetion $e)
+	catch (Exception $e)
 	{
-		//$data = array();
-		$data[] = newEmptyModelsArray();
+		echo $e;
 	}
 }
 else
 {
-	$data[] = newEmptyModelsArray();
+	echo "invalid state";
 }
 
 

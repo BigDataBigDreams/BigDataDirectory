@@ -11,9 +11,11 @@
   phps = 'resources/main/load';
 
   findAjax = function(type, obj, call) {
-    return $.getJSON(phps + type + '.php', obj, function(res) {
+    return $.post(phps + type + '.php', obj, function(res) {
+      var jsonRes;
       console.log(res);
-      return call(res);
+      jsonRes = eval(res);
+      return call(jsonRes);
     });
   };
 
@@ -33,7 +35,6 @@
   window.nearestStar = function(stars, row) {
     var tname;
     tname = getTable(row);
-    console.log(tname + " " + (stars + 1));
     return findAjax('ByStar', {
       'tableName': tname,
       'star': stars + 1
@@ -92,7 +93,7 @@
 				<option value="">Select appliance</option>\
 				<option value="airconditioner">Air conditioner</option>\
 				<option value="clothesdryer">Clothes dryer</option>\
-				<option value="computormonitors">Computor monitor</option>\
+				<option value="computermonitors">Computor monitor</option>\
 				<option value="dishwashers">Dishwasher</option>\
 				<option value="fridgefreezer">Fridge/Freezer</option>\
 				<option value="television">Television</option>\
