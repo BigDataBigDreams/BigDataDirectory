@@ -2,8 +2,10 @@
 
 <html>
 	<head>
-		<title>Job Predictions</title>
+		<title>Toasty</title>
 		<link href="css/layout.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="js/interactive.js"></script>
 	</head>
 
 	<body>
@@ -32,23 +34,8 @@
 							<th></th>
 							<th>Carbon emissions<br />(tonnes per year)</th>
 						</tr>
-						<tr>
-							<td>
-								<select id="applianceType">
-									<option value="airconditioner">Air conditioner</option>
-									<option value="clothesdryer">Clothes dryer</option>
-									<option value="computormonitors">Computor monitor</option>
-									<option value="dishwashers">Dishwasher</option>
-									<option value="fridgefreezer">Fridge/Freezer</option>
-									<option value="television">Television</option>
-								</select>
-							</td>
-							<td><input type="text" value="Select model"></input></td>
-							<td><a href="javascript:void(0);">or use energy stars</a></td>
-							<td></td>
-						</tr>
 					</table>
-					<a href="javascript:void(0);">+ Add another appliance</a>
+					<a id="addAppliance" href="javascript:void(0);">+ Add another appliance</a>
 				</div>
 				<div class="results">
 					<div class="temperature">
@@ -56,7 +43,10 @@
 						<div id="tempValue">0.00°c</div>
 					</div>
 					<div id="showbox">
-						##CONTENT##
+						Show : <br />
+						<input type="radio" name="show" value="me" />Australia <br />
+						<input type="radio" name="show" value="aus" />Only me <br />
+						<input type="radio" name="show" value="Worldwide" />Worldwide
 					</div>
 				</div>
 			</div>
