@@ -1,4 +1,13 @@
 /*Layout*/
+input, select {
+	padding: 0.2em 0.5em;	
+	font-size: 1.1em;
+}
+
+.my-appliances input {
+	width: 20em;
+}
+
 .navbox-wrap{
 	position: absolute;
 	width: 30%;
@@ -15,6 +24,7 @@
 	right: 2px;
 	top: 0px;
 	bottom: 0px;
+	margin: 0px 8px;
 }
 
 .navbox, .main-logo-wrap {
@@ -25,7 +35,7 @@
 }
 
 .navbox {
-	list-style:none;	
+	list-style:none;
 }
 
 .navbox li {
@@ -45,19 +55,40 @@
 	min-width: 400px;
 }
 
-.banner {
-	font-size: 1.25em;
-	height: 100px;
+.appliance-table th {
+	word-wrap: none;	
+}
+
+.header {
+	padding-left: 1em;
+	font-size: 1.75em;
+	margin-top: 2px;
+	padding: 0.5em 1em;
+}
+
+.result-box {
+	margin: 0.1em;
+	position: relative;
+}
+
+.result-box h2 {
+	width: 100%;
+	text-align: center;
 }
 
 /*style*/
+
 body {
-		font-family: "Calibri (body)", "Calibri", "sans-serif";
+	font-family: "Calibri (body)", "Calibri", "sans-serif";
 }
 
 .logo {
 	background-color: #AAAAAA;
-	margin: 5px 8px;	
+}
+
+.header {
+	color: white;
+	background-color: rgb(16,91,99); 	
 }
 
 .navbox li {
@@ -67,4 +98,12 @@ body {
 
 .navbox .active, .navbox .active:hover {
 	background-color: rgb(24,136,148);
+}
+
+.navbox li:hover {
+	background-color: #1EA9B8;	
+}
+
+.result-box h2 {
+	background-color: rgb(140,140,140);
 }

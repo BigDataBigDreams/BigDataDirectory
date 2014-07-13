@@ -14,7 +14,7 @@
 				</div>
 			</div>
 			<ul class="navbox">
-				<li class="active">My Energy Consumption</li>
+				<li class="active">My carbon emission</li>
 				<li>Analysis of my results</li>
 				<li>How do I compare?</li>
 				<li>How to reduce my consumption</li>
@@ -23,17 +23,26 @@
 		</div>
 		<div class="content-wrap">
 			<div class="content">
-				<h1 class="header">MY ENERGY CONSUMPTION</h1>
-				<div class="myAppliances">
-					<table class="applianceTable">
+				<h1 class="header">MY CARBON EMISSIONS</h1>
+				<div class="my-appliances">
+					<table class="appliance-table">
 						<tr>
 							<th></th>
 							<th></th>
 							<th></th>
-							<th>Carbon Emmisions<br />(tonnes per year)</th>
+							<th>Carbon emissions<br />(tonnes per year)</th>
 						</tr>
 						<tr>
-							<td><input type="text" value="Select appliance"></input></td>
+							<td>
+								<select id="applianceType">
+									<option value="fridgefreezer">Fridge/Freezer</option>
+									<option value="airconditioner">Airconditioner</option>
+									<option value="clothesdryer">Clothes dryer</option>
+									<option value="computormonitors">Computor monitor</option>
+									<option value="dishwashers">Dishwasher</option>
+									<option value="television">Television</option>
+								</select>
+							</td>
 							<td><input type="text" value="Select model"></input></td>
 							<td><a href="javascript:void(0);">Use energy stars</a></td>
 							<td></td>
