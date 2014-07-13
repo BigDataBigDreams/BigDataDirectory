@@ -11,20 +11,19 @@ window.modelInput = ()->
 			this.value = SELECT_MODEL if !this.value
 		)
 
-
 window.getStarInput = ()->
 	starspan = $('<span>').addClass('stars')
 	stars = []
 	for j in [0...6]
-		_j = j
-		stars.push($('<span>')
-			.click(()->
-				for k in [0.._j]
-					stars[k].addClass('active')
-				for k in [_j+1...6]
-					stars[k].removeClass('active')))
+		do ()->
+			lj = j
+			stars.push($('<span>')
+				.click(()->
+					star.removeClass('active') for star in stars
+					stars[k].addClass('active') for k in [0..lj]))
+				
 	return starspan.append(stars)
-
+	
 window.getNewRow = ()->
 	newRow = $('<tr>')
 		.append($('<td>').html(
@@ -60,7 +59,7 @@ $(document).ready ()->
 	addNewAppliance()
 	$('#addAppliance').click(addNewAppliance)
 
-	
+
 window.resultsReady = do ()->
 	res = false
 	return (val)->

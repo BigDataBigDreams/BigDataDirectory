@@ -24,22 +24,27 @@
   };
 
   window.getStarInput = function() {
-    var j, stars, starspan, _i, _j;
+    var j, stars, starspan, _fn, _i;
     starspan = $('<span>').addClass('stars');
     stars = [];
-    for (j = _i = 0; _i < 6; j = ++_i) {
-      _j = j;
-      stars.push($('<span>').click(function() {
-        var k, _k, _l, _ref, _results;
-        for (k = _k = 0; 0 <= _j ? _k <= _j : _k >= _j; k = 0 <= _j ? ++_k : --_k) {
-          stars[k].addClass('active');
+    _fn = function() {
+      var lj;
+      lj = j;
+      return stars.push($('<span>').click(function() {
+        var k, star, _j, _k, _len, _results;
+        for (_j = 0, _len = stars.length; _j < _len; _j++) {
+          star = stars[_j];
+          star.removeClass('active');
         }
         _results = [];
-        for (k = _l = _ref = _j + 1; _ref <= 6 ? _l < 6 : _l > 6; k = _ref <= 6 ? ++_l : --_l) {
-          _results.push(stars[k].removeClass('active'));
+        for (k = _k = 0; 0 <= lj ? _k <= lj : _k >= lj; k = 0 <= lj ? ++_k : --_k) {
+          _results.push(stars[k].addClass('active'));
         }
         return _results;
       }));
+    };
+    for (j = _i = 0; _i < 6; j = ++_i) {
+      _fn();
     }
     return starspan.append(stars);
   };

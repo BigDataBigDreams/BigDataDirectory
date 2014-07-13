@@ -13,7 +13,22 @@ input, select {
 	display: block;
 }
 
-.navbox-wrap{
+.stars span {
+	background-image: url('/img/starUnselected.png');
+	background-size: 2em, 2em;
+	background-repeat:no-repeat;
+	display: block;
+	float: left;
+	width: 2em;
+	height: 2em;
+	margin: 0px 5px;
+}
+
+.stars .active, .stars span:hover {
+	background-image: url('/img/starSelected.png');		
+}
+
+.navbox-wrap {
 	position: absolute;
 	width: 30%;
 }
