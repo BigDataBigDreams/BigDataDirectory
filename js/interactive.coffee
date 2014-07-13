@@ -8,7 +8,16 @@ findAjax = (type, obj, call)->
 		console.log(res)
 		jsonRes = eval(res)
 		call(jsonRes))
-	
+		
+betterLog = (x, y)-> Math.log(y) / Math.log(x)
+
+calcMain = ()->
+	rows = $('tr')
+	sum = 0
+	for j in [1...rows.length]
+		sum += parseInt($(rows[j]).find('td').last().html(), 10)
+	$('#tempValue').html(sum + '°')#.css('width', betterLog(10, sum)+1 + 'em')
+		
 window.getTable = (row)->return $(row).find('select').val()
 findBrand = (row)->
 	findAjax('Brands', {'tableName':getTable(row),'brand':like},(brands)->showBrands(row, brands))
@@ -57,20 +66,20 @@ window.getNewRow = ()->
 				<option value="fridgefreezer">Fridge/Freezer</option>
 				<option value="television">Television</option>
 			</select>'))
-		.append($('<td>').addClass('input').html(modelInput()))
-		.append($('<td>').append($('<a>')
-			.html(OR_USE_STARS)
-			.attr('href', "javascript:void(0);")
-			.addClass('use-stars-button')
-			.click(()->
-				jthis = $(this)
-				if jthis.html() == OR_USE_MODEL
-					jthis.html(OR_USE_STARS)
-					newRow.find('.input').html(modelInput())
-				else
-					jthis.html(OR_USE_MODEL)
-					newRow.find('.input').html(getStarInput()))))
+		.append($('<td>').addClass('input').html(getStarInput()))
+		.append($('<td>').append($('<a>')))
 		.append($('<td>').html(0))
+		#	.attr('href', "javascript:void(0);")
+		#	.addClass('use-stars-button')
+		#	.click(()->
+		#		jthis = $(this)
+		#		if jthis.html() == OR_USE_MODEL
+		#			jthis.html(OR_USE_STARS)
+		#			newRow.find('.input').html(modelInput())
+		#		else
+		#			jthis.html(OR_USE_MODEL)
+		#			newRow.find('.input').html(getStarInput()))))
+		
 	return newRow
 	
 addNewAppliance = ()->		
