@@ -4,7 +4,7 @@ import MySQLdb
 db = MySQLdb.connect('localhost','govhack', 'gov', 'govhack')
 cur = db.cursor()
 
-fout = open('C:\\wamp\\www\\dump.txt', 'w')
+fout = open('C:\\wamp\\www\\data\\dump.txt', 'w')
 def ex(sql):
 	try:
 		print sql
@@ -68,12 +68,12 @@ class DataSet:
 			ex(sql)
 
 sets = []
-sets.append(DataSet("clothesdryer","cd",{"brand":"Brand","model":"Model No","star":"New Star","power":"New CEC"}))
-sets.append(DataSet("dishwashers","dw",{"brand":"Brand","model":"Model No","star":"New Star","power":"CEC_"}))
-sets.append(DataSet("clotheswashers","cw",{"brand":"Brand","model":"Model No","star":"New Star","power":"CEC_"}))
-sets.append(DataSet("fridgefreezer","ff",{"brand":"Brand","model":"Model No","star":"Star2009","power":"CEC_"}))
-sets.append(DataSet("televisions","tv",{"brand":"Brand_Reg","model":"Model_No","star":"Star","power":"CEC"}))
-sets.append(DataSet("computermonitors","cm",{"brand":"Brand Name","model":"Model Number","star":"Star Rating","power":"Comparative Energy Consumption"}))
+#sets.append(DataSet("clothesdryer","cd",{"brand":"Brand","model":"Model No","star":"New Star","power":"New CEC"}))
+#sets.append(DataSet("dishwashers","dw",{"brand":"Brand","model":"Model No","star":"New Star","power":"CEC_"}))
+#sets.append(DataSet("clotheswashers","cw",{"brand":"Brand","model":"Model No","star":"New Star","power":"CEC_"}))
+#sets.append(DataSet("fridgefreezer","ff",{"brand":"Brand","model":"Model No","star":"Star2009","power":"CEC_"}))
+#sets.append(DataSet("televisions","tv",{"brand":"Brand_Reg","model":"Model_No","star":"Star","power":"CEC"}))
+#sets.append(DataSet("computermonitors","cm",{"brand":"Brand Name","model":"Model Number","star":"Star Rating","power":"Comparative Energy Consumption"}))
 sets.append(DataSet('airconditioner', 'ac', {'brand':'Brand','model':'Model_No','star':'Star2010_Heat','power':'H-Power_Inp_Rated'}))	
 
 for sett in sets:
