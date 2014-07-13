@@ -76,6 +76,28 @@ input, select {
 	text-align: center;
 }
 
+.results {
+	position: relative;
+	left: 0px;
+	right: 0px;
+	margin-top: 2em;
+	min-width: 300px;
+}
+
+.temperature {
+	height: 25ex;
+	width: 60%;
+	font-weight: bold;
+}
+
+#tempValue {
+	position: relative;
+	font-size: 6.5em;
+	font-weight: bold;
+	margin: 0.1em auto;
+	width: 3em;
+}
+
 /*style*/
 
 body {
@@ -107,3 +129,8 @@ body {
 .result-box h2 {
 	background-color: rgb(140,140,140);
 }
+
+.temperature {
+	background-color: rgb(229,235,242);	
+}
+
