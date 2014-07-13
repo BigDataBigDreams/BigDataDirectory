@@ -1,8 +1,8 @@
 SELECT_MODEL = "Search for model"
-USE_STARS = "or use stars"
-USE_MODEL = "or search model"
+OR_USE_STARS = "or use stars"
+OR_USE_MODEL = "or search model"
 
-modelInput = ()->
+window.modelInput = ()->
 	return $('<input>').addClass('model')
 		.attr({type: 'text',value:SELECT_MODEL})
 		.focusin(()->
@@ -10,6 +10,20 @@ modelInput = ()->
 		).focusout(()->
 			this.value = SELECT_MODEL if !this.value
 		)
+
+
+window.getStarInput = ()->
+	starspan = $('<span>').addClass('stars')
+	stars = []
+	for j in [0...6]
+		_j = j
+		stars.push($('<span>')
+			.click(()->
+				for k in [0.._j]
+					stars[k].addClass('active')
+				for k in [_j+1...6]
+					stars[k].removeClass('active')))
+	return starspan.append(stars)
 
 window.getNewRow = ()->
 	newRow = $('<tr>')
@@ -23,34 +37,21 @@ window.getNewRow = ()->
 				<option value="fridgefreezer">Fridge/Freezer</option>
 				<option value="television">Television</option>
 			</select>'))
-		.append($('<td>').html(modelInput()))
+		.append($('<td>').addClass('input').html(modelInput()))
 		.append($('<td>').append($('<a>')
-			.html(USE_STARS)
+			.html(OR_USE_STARS)
 			.attr('href', "javascript:void(0);")
 			.addClass('use-stars-button')
 			.click(()->
 				jthis = $(this)
-				if jthis.html() == USE_STARS
-					jthis.html(USE_MODEL)
+				if jthis.html() == OR_USE_MODEL
+					jthis.html(OR_USE_STARS)
 					newRow.find('.input').html(modelInput())
 				else
-					jthis.html(USE_STARS)))
-					newRow.find('.input').html(getStarInput()))
+					jthis.html(OR_USE_MODEL)
+					newRow.find('.input').html(getStarInput()))))
 		.append($('<td>'))
-		return newRow
-
-getStarInput = ()->
-	starspan = $('<span>').addClass('stars')
-	stars = []
-	for j in [0...6]
-		_j = j
-		stars.push($('<span>')
-			.click(()->
-				for k in [0.._j]
-					stars[k].addClass('active')
-				for k in [_j+1...6]
-					stars[k].removeClass('active')))
-	return starspan
+	return newRow
 	
 addNewAppliance = ()->		
 	$('.appliance-table').append(getNewRow())

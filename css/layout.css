@@ -4,8 +4,13 @@ input, select {
 	font-size: 1.1em;
 }
 
-.my-appliances input {
+.my-appliances input, .stars {
 	width: 20em;
+}
+
+.stars {
+	position: relative;
+	display: block;
 }
 
 .navbox-wrap{
