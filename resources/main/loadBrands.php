@@ -16,8 +16,8 @@ $_POST['brand'] = "A";
 
 if( isset($_POST['tableName']) && !empty($_POST['tableName']) && isset($_POST['brand']) )
 {
-	$tableName = $_POST['tableName']; $brand = $_POST['brand'];
-	$sql = "SELECT DISTINCT brand FROM $tableName WHERE brand LIKE '$brand%' limit 10;";
+	$tableName = $_POST['tableName']; $brand = strtoupper($_POST['brand']);
+	$sql = "SELECT DISTINCT brand FROM $tableName WHERE UPPER(brand) LIKE '$brand%' limit 10;";
 	$result = mysqli_query($connectDB, $sql);
 	if($result)
 	{
