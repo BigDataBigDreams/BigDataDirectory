@@ -2,21 +2,33 @@
 
 include "../loadFiles.php";
 
-$connect = connectDB($config);
+$connectDB = mysqli_connect($config['db']['govhack']['host'],$config['db']['govhack']['username'],
+		$config['db']['govhack']['password'],$config['db']['govhack']['dbname']);
 
-$data = "";
+//Check connection
+if (mysqli_connect_errno())
+  echo "Failed to connect to MySQL: " . mysqli_connect_error() . "<br>";
 
-if( isset($_POST['tableName']) && !empty($_POST['tableName'] && isset($_POST['brand']))
+$data = array();
+
+$_POST['tableName'] = "airconditioner";
+$_POST['brand'] = "A";
+
+if( isset($_POST['tableName']) && !empty($_POST['tableName']) && isset($_POST['brand']) )
 {
-
+	$tableName = $_POST['tableName']; $brand = $_POST['brand'];
+	$sql = "SELECT DISTINCT brand FROM $tableName WHERE brand LIKE '$brand%' limit 10;";
+	$result = mysqli_query($connectDB, $sql);
+	if($result)
+	{
+		while($row = mysqli_fetch_array($result))
+		{
+	    	$data[] = $row[0];
+		}
+	}
 }
-else
-{
 
-}
+echo json_encode($data);
 
-echo $data;
-//echo json_encode($data);
-
-closeDB($connect);
+mysqli_close($connectDB);
 ?>

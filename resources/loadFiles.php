@@ -1,11 +1,10 @@
 <?php
 include 'config.php';
-include 'loadDatabase.php';
 
-function newEmptyArray()
+function newEmptyModelsArray()
 {
 	return $newEmptyArray = array(
-    "db" => array(
+    array(
 	        "id" => "1",
 	        "brand" => "",
 	        "model" => "",
@@ -13,6 +12,12 @@ function newEmptyArray()
 	        "star" => "",
 	    ),
 	);
+}
+
+function checkValidBrand($connectDB, $brand)
+{
+	$sql = "SELECT DISTINCT brand FROM $tableName WHERE brand LIKE '$brand%'";
+	$result = mysqli_query($connectDB, $sql);
 }
 
 // $connect = connectDB($config);
