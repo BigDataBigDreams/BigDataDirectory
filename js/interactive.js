@@ -30,7 +30,7 @@
     for (j = _i = 1, _ref = rows.length; 1 <= _ref ? _i < _ref : _i > _ref; j = 1 <= _ref ? ++_i : --_i) {
       sum += parseInt($(rows[j]).find('td').last().html(), 10);
     }
-    return $('#tempValue').html(sum + '�');
+    return $('#tempValue').html(sum.toFixed(2) + '*C').css('width', betterLog(10, sum) + 2 + 'em');
   };
 
   window.getTable = function(row) {
@@ -53,7 +53,8 @@
       'tableName': tname,
       'star': stars + 1
     }, function(res) {
-      return row.find('td').last().html(res[0].power);
+      row.find('td').last().html(res[0].power);
+      return calcMain();
     });
   };
 

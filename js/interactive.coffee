@@ -16,7 +16,7 @@ calcMain = ()->
 	sum = 0
 	for j in [1...rows.length]
 		sum += parseInt($(rows[j]).find('td').last().html(), 10)
-	$('#tempValue').html(sum + '°')#.css('width', betterLog(10, sum)+1 + 'em')
+	$('#tempValue').html(sum.toFixed(2) + '*C').css('width', betterLog(10, sum)+2 + 'em')
 		
 window.getTable = (row)->return $(row).find('select').val()
 findBrand = (row)->
@@ -24,7 +24,9 @@ findBrand = (row)->
 
 window.nearestStar = (stars, row)->
 	tname = getTable(row)
-	findAjax('ByStar', {'tableName':tname,'star':stars+1},(res)->row.find('td').last().html(res[0].power))
+	findAjax('ByStar', {'tableName':tname,'star':stars+1},(res)->
+		row.find('td').last().html(res[0].power)
+		calcMain())
 	
 showBrands = (row, brands)->
 	#don some
