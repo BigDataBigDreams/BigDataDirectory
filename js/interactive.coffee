@@ -4,14 +4,17 @@ OR_USE_MODEL = "or search model"
 
 phps = 'resources/main/load'
 findAjax = (type, obj, call)->
-	$.post(phps+type+'.php', obj, call)
+	$.getJSON(phps+type+'.php', obj, (res)->
+		console.log(res)
+		call(res))
 	
 window.getTable = (row)->return $(row).find('select').val()
 findBrand = (row)->
 	findAjax('Brands', {'tableName':getTable(row),'brand':like},(brands)->showBrands(row, brands))
 
 window.nearestStar = (stars, row)->
-	findAjax('ByStar', {'tableName':getTable(row),'star':stars},(res)->console.log(res))#row.find('td').last().html(res.power))
+	tname = getTable(row)
+	findAjax('ByStar', {'tableName':tname,'star':stars+1},(res)->row.find('td').last().html(res[0].power))
 	
 showBrands = (row, brands)->
 	#don some

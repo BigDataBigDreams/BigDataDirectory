@@ -17,14 +17,12 @@ if( isset($_POST['tableName']) && !empty($_POST['tableName']) && isset($_POST['s
 	{
 		$tableName = $_POST['tableName']; 
 		$star = $_POST['star'];
-		$max = $star + 0.5; $min = $star - 0.5; 
-		$sql = "SELECT * FROM airconditioner
-				ORDER BY ABS(star-$star) ASC limit 10";
+		$sql = "SELECT * FROM $tableName ORDER BY ABS(star-$star) limit 10;";
 		$result = mysqli_query($connectDB, $sql);
 		if($result)
 		{
 			while($row = mysqli_fetch_array($result))
-			{	
+			{
 		    	$data[] = array(
 			        "id" => $row['id'],
 			        "brand" => $row['brand'],
@@ -37,7 +35,7 @@ if( isset($_POST['tableName']) && !empty($_POST['tableName']) && isset($_POST['s
 	}
 	catch (Expcetion $e)
 	{
-		$data = array();
+		//$data = array();
 		$data[] = newEmptyModelsArray();
 	}
 }

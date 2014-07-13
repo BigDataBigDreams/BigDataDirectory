@@ -11,7 +11,10 @@
   phps = 'resources/main/load';
 
   findAjax = function(type, obj, call) {
-    return $.post(phps + type + '.php', obj, call);
+    return $.getJSON(phps + type + '.php', obj, function(res) {
+      console.log(res);
+      return call(res);
+    });
   };
 
   window.getTable = function(row) {
@@ -28,11 +31,14 @@
   };
 
   window.nearestStar = function(stars, row) {
+    var tname;
+    tname = getTable(row);
+    console.log(tname + " " + (stars + 1));
     return findAjax('ByStar', {
-      'tableName': getTable(row),
-      'star': stars
+      'tableName': tname,
+      'star': stars + 1
     }, function(res) {
-      return console.log(res);
+      return row.find('td').last().html(res[0].power);
     });
   };
 

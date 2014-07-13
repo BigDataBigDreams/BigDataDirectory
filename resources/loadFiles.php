@@ -5,11 +5,11 @@ function newEmptyModelsArray()
 {
 	return $newEmptyArray = array(
     array(
-	        "id" => "1",
+	        "id" => -1,
 	        "brand" => "",
 	        "model" => "",
-	        "power" => "",
-	        "star" => "",
+	        "power" => 0,
+	        "star" => 0,
 	    ),
 	);
 }
